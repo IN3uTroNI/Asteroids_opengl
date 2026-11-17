@@ -46,7 +46,7 @@ int main()
 	//Load GLAD so it configures OpenGL
 	gladLoadGL();
 	// Specify the viewport of OpenGL in the Window
-	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
+	// In this case the viewport goes from x = 0, y = 0, to x = 1000, y = 1000
 	glViewport(0, 0, 1000, 1000);
 
 	// Generates Shader object using shaders default.vert and default.frag
@@ -69,14 +69,14 @@ int main()
 
 	Cube cube(cubeLocation, 0.15f, 0.075f, colors::white);
 
-	Circle circle1(circleLocation1, 0.075f, colors::white, res::LOW_RES, cube);
-	Circle circle2(circleLocation2, 0.075f, colors::white, res::MEDIUM_LOW_RES, cube);
-	Circle circle3(circleLocation3, 0.075f, colors::white, res::MEDIUM_RES, cube);
-	Circle circle4(circleLocation4, 0.075f, colors::white, res::MEDIUM_HIGH_RES, cube);
-	Circle circle5(circleLocation5, 0.075f, colors::white, res::HIGH_RES, cube);
+	Circle circle1(circleLocation1, 0.075f, colors::lightGray, res::LOW_RES, cube);
+	Circle circle2(circleLocation2, 0.075f, colors::lightGray, res::MEDIUM_LOW_RES, cube);
+	Circle circle3(circleLocation3, 0.075f, colors::lightGray, res::MEDIUM_RES, cube);
+	Circle circle4(circleLocation4, 0.075f, colors::lightGray, res::MEDIUM_HIGH_RES, cube);
+	Circle circle5(circleLocation5, 0.075f, colors::lightGray, res::HIGH_RES, cube);
 
 	int score_ = 0;
-	Timer score(score_, 0.65f, 0.75f, 0.5f);
+	Timer score(score_, 0.65f, 0.75f, 0.5f, colors::white);
 
 	// Bind, Link and Unbind the VAO, VBO, EBO to initialize the squares
 	cube.cubeInit();
@@ -104,7 +104,6 @@ int main()
 
 		// movement
 		cube.Input(window);
-
 
 
 

@@ -104,7 +104,7 @@ public:
     VBO timerVBO;
     EBO timerEBO;
 
-    Timer(int score, GLfloat offsetX, GLfloat offsetY, GLfloat scale);
+    Timer(int score, GLfloat offsetX, GLfloat offsetY, GLfloat scale, GLfloat color_[3]);
     void timerBind();
     void timerLink();
     void timerUnbind();

@@ -13,39 +13,39 @@ inline std::vector<GLuint> sum(std::vector<GLuint> v1, int mod) {
 }
 
 
-Timer::Timer(int score, GLfloat offsetX, GLfloat offsetY, GLfloat scale) : timer(score) {
+Timer::Timer(int score, GLfloat offsetX, GLfloat offsetY, GLfloat scale, GLfloat color_[3]) : timer(score) {
     GLfloat tempVert[] = {
         // first part 00<-
-        0.50f, 0.50f, 0.0f,     0.0f, 0.0f, 0.0f,   // 0
-        0.60f, 0.50f, 0.0f,     0.0f, 0.0f, 0.0f,   // 1
-        0.58f, 0.48f, 0.0f,     0.0f, 0.0f, 0.0f,   // 2
-        0.52f, 0.48f, 0.0f,     0.0f, 0.0f, 0.0f,   // 3
-        0.52f, 0.42f, 0.0f,     0.0f, 0.0f, 0.0f,   // 4
-        0.58f, 0.42f, 0.0f,     0.0f, 0.0f, 0.0f,   // 5
-        0.50f, 0.40f, 0.0f,     0.0f, 0.0f, 0.0f,   // 6
-        0.60f, 0.40f, 0.0f,     0.0f, 0.0f, 0.0f,   // 7
-        0.52f, 0.38f, 0.0f,     0.0f, 0.0f, 0.0f,   // 8
-        0.52f, 0.32f, 0.0f,     0.0f, 0.0f, 0.0f,   // 9
-        0.58f, 0.38f, 0.0f,     0.0f, 0.0f, 0.0f,   // 10
-        0.58f, 0.32f, 0.0f,     0.0f, 0.0f, 0.0f,   // 11
-        0.50f, 0.30f, 0.0f,     0.0f, 0.0f, 0.0f,   // 12
-        0.60f, 0.30f, 0.0f,     0.0f, 0.0f, 0.0f,   // 13
+        0.50f, 0.50f, 0.0f,     color_[0], color_[1], color_[2],   // 0
+        0.60f, 0.50f, 0.0f,     color_[0], color_[1], color_[2],   // 1
+        0.58f, 0.48f, 0.0f,     color_[0], color_[1], color_[2],   // 2
+        0.52f, 0.48f, 0.0f,     color_[0], color_[1], color_[2],   // 3
+        0.52f, 0.42f, 0.0f,     color_[0], color_[1], color_[2],   // 4
+        0.58f, 0.42f, 0.0f,     color_[0], color_[1], color_[2],   // 5
+        0.50f, 0.40f, 0.0f,     color_[0], color_[1], color_[2],   // 6
+        0.60f, 0.40f, 0.0f,     color_[0], color_[1], color_[2],   // 7
+        0.52f, 0.38f, 0.0f,     color_[0], color_[1], color_[2],   // 8
+        0.52f, 0.32f, 0.0f,     color_[0], color_[1], color_[2],   // 9
+        0.58f, 0.38f, 0.0f,     color_[0], color_[1], color_[2],   // 10
+        0.58f, 0.32f, 0.0f,     color_[0], color_[1], color_[2],   // 11
+        0.50f, 0.30f, 0.0f,     color_[0], color_[1], color_[2],   // 12
+        0.60f, 0.30f, 0.0f,     color_[0], color_[1], color_[2],   // 13
 
         // second part ->00
-        0.35f, 0.50f, 0.0f,     0.0f, 0.0f, 0.0f,   // 14
-        0.45f, 0.50f, 0.0f,     0.0f, 0.0f, 0.0f,   // 15
-        0.43f, 0.48f, 0.0f,     0.0f, 0.0f, 0.0f,   // 16
-        0.37f, 0.48f, 0.0f,     0.0f, 0.0f, 0.0f,   // 17
-        0.37f, 0.42f, 0.0f,     0.0f, 0.0f, 0.0f,   // 18
-        0.43f, 0.42f, 0.0f,     0.0f, 0.0f, 0.0f,   // 19
-        0.35f, 0.40f, 0.0f,     0.0f, 0.0f, 0.0f,   // 20
-        0.45f, 0.40f, 0.0f,     0.0f, 0.0f, 0.0f,   // 21
-        0.37f, 0.38f, 0.0f,     0.0f, 0.0f, 0.0f,   // 22
-        0.37f, 0.32f, 0.0f,     0.0f, 0.0f, 0.0f,   // 23
-        0.43f, 0.38f, 0.0f,     0.0f, 0.0f, 0.0f,   // 24
-        0.43f, 0.32f, 0.0f,     0.0f, 0.0f, 0.0f,   // 25
-        0.35f, 0.30f, 0.0f,     0.0f, 0.0f, 0.0f,   // 26
-        0.45f, 0.30f, 0.0f,     0.0f, 0.0f, 0.0f    // 27
+        0.35f, 0.50f, 0.0f,     color_[0], color_[1], color_[2],   // 14
+        0.45f, 0.50f, 0.0f,     color_[0], color_[1], color_[2],   // 15
+        0.43f, 0.48f, 0.0f,     color_[0], color_[1], color_[2],   // 16
+        0.37f, 0.48f, 0.0f,     color_[0], color_[1], color_[2],   // 17
+        0.37f, 0.42f, 0.0f,     color_[0], color_[1], color_[2],   // 18
+        0.43f, 0.42f, 0.0f,     color_[0], color_[1], color_[2],   // 19
+        0.35f, 0.40f, 0.0f,     color_[0], color_[1], color_[2],   // 20
+        0.45f, 0.40f, 0.0f,     color_[0], color_[1], color_[2],   // 21
+        0.37f, 0.38f, 0.0f,     color_[0], color_[1], color_[2],   // 22
+        0.37f, 0.32f, 0.0f,     color_[0], color_[1], color_[2],   // 23
+        0.43f, 0.38f, 0.0f,     color_[0], color_[1], color_[2],   // 24
+        0.43f, 0.32f, 0.0f,     color_[0], color_[1], color_[2],   // 25
+        0.35f, 0.30f, 0.0f,     color_[0], color_[1], color_[2],   // 26
+        0.45f, 0.30f, 0.0f,     color_[0], color_[1], color_[2]    // 27
     };
     // Set the points for the score
     for (int i = 0; i < 168; i++) {
