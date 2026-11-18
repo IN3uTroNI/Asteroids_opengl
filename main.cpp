@@ -61,19 +61,20 @@ int main()
 		0.0f, -0.58f
 	};
 
-	GLfloat circleLocation1[] = { -0.4f, 0.0f };
-	GLfloat circleLocation2[] = { -0.2f, 0.0f };
-	GLfloat circleLocation3[] = { 0.0f, 0.0f };
-	GLfloat circleLocation4[] = { 0.2f, 0.0f };
-	GLfloat circleLocation5[] = { 0.4f, 0.0f };
+	// All circles have been executed
+	// GLfloat circleLocation1[] = { -0.4f, 0.0f };
+	// GLfloat circleLocation2[] = { -0.2f, 0.0f };
+	// GLfloat circleLocation3[] = { 0.0f, 0.0f };
+	// GLfloat circleLocation4[] = { 0.2f, 0.0f };
+	// GLfloat circleLocation5[] = { 0.4f, 0.0f };
 
 	Cube cube(cubeLocation, 0.15f, 0.075f, colors::white);
 
-	Circle circle1(circleLocation1, 0.075f, colors::lightGray, res::LOW_RES, cube);
-	Circle circle2(circleLocation2, 0.075f, colors::lightGray, res::MEDIUM_LOW_RES, cube);
-	Circle circle3(circleLocation3, 0.075f, colors::lightGray, res::MEDIUM_RES, cube);
-	Circle circle4(circleLocation4, 0.075f, colors::lightGray, res::MEDIUM_HIGH_RES, cube);
-	Circle circle5(circleLocation5, 0.075f, colors::lightGray, res::HIGH_RES, cube);
+	// Circle circle1(circleLocation1, 0.075f, colors::lightGray, res::LOW_RES, cube);
+	// Circle circle2(circleLocation2, 0.075f, colors::lightGray, res::MEDIUM_LOW_RES, cube);
+	// Circle circle3(circleLocation3, 0.075f, colors::lightGray, res::MEDIUM_RES, cube);
+	// Circle circle4(circleLocation4, 0.075f, colors::lightGray, res::MEDIUM_HIGH_RES, cube);
+	// Circle circle5(circleLocation5, 0.075f, colors::lightGray, res::HIGH_RES, cube);
 
 	int score_ = 65;
 	Timer score(score_, 0.65f, 0.75f, 0.5f, colors::white);
@@ -81,11 +82,11 @@ int main()
 	// Bind, Link and Unbind the VAO, VBO, EBO to initialize the squares
 	cube.cubeInit();
 
-	circle1.circleInit();
-	circle2.circleInit();
-	circle3.circleInit();
-	circle4.circleInit();
-	circle5.circleInit();
+	// circle1.circleInit();
+	// circle2.circleInit();
+	// circle3.circleInit();
+	// circle4.circleInit();
+	// circle5.circleInit();
 
 	score.timerInit();
 
@@ -94,7 +95,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		// Specify the color of the background
-		glClearColor(0.202f, 0.202f, 0.280f, 1.0f);
+		glClearColor(0.102f, 0.102f, 0.180f, 1.0f);
 		// Clean the back buffer and assign the new color to it
 		glClear(GL_COLOR_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
@@ -110,11 +111,11 @@ int main()
 		// Draw the square
 		cube.drawCube();
 
-		circle1.circleDraw();
-		circle2.circleDraw();
-		circle3.circleDraw();
-		circle4.circleDraw();
-		circle5.circleDraw();
+		// circle1.circleDraw();
+		// circle2.circleDraw();
+		// circle3.circleDraw();
+		// circle4.circleDraw();
+		// circle5.circleDraw();
 
 		score.timerDraw();
 
@@ -127,11 +128,11 @@ int main()
 	// Delete the square
 	cube.cubeDelete();
 
-	circle1.circleDelete();
-	circle2.circleDelete();
-	circle3.circleDelete();
-	circle4.circleDelete();
-	circle5.circleDelete();
+	// circle1.circleDelete();
+	// circle2.circleDelete();
+	// circle3.circleDelete();
+	// circle4.circleDelete();
+	// circle5.circleDelete();
 
 	score.timerDelete();
 

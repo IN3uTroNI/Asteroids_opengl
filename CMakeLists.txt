@@ -20,6 +20,8 @@ add_executable(app
         src/glad.c
         Circle.cpp
         Timer.cpp
+        Spawner.cpp
+        Bullet.cpp
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
