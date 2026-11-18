@@ -75,7 +75,7 @@ int main()
 	Circle circle4(circleLocation4, 0.075f, colors::lightGray, res::MEDIUM_HIGH_RES, cube);
 	Circle circle5(circleLocation5, 0.075f, colors::lightGray, res::HIGH_RES, cube);
 
-	int score_ = 0;
+	int score_ = 65;
 	Timer score(score_, 0.65f, 0.75f, 0.5f, colors::white);
 
 	// Bind, Link and Unbind the VAO, VBO, EBO to initialize the squares

@@ -17,17 +17,11 @@
 class Cube {
 public:
     // The points
-    GLfloat vertices[72];
+    GLfloat vertices[24];
     // Indices for vertices order
-    GLuint indices[18] = {
+    GLuint indices[6] = {
         0, 2, 1, // Upper triangle
-        1, 3, 2, // Lower triangle
-
-        4, 5, 7, // up upper triangle
-        5, 6, 7, // up lower triangle
-
-        8, 9, 1,   // right wing
-        10, 11, 3, // left wing
+        0, 3, 2, // Lower triangle
     };
 
     VAO cubeVAO;

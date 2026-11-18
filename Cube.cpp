@@ -9,24 +9,14 @@
 #include <ostream>
 
 Cube::Cube(GLfloat centerPoint_[2], GLfloat height_, GLfloat width_, GLfloat color_[3]) {
-    GLfloat newVert[72] = {
-        centerPoint_[0] - (width_/2), centerPoint_[1] + (height_/2),    0.0f,    color_[0], color_[1], color_[2], // Upper left corner
+    GLfloat newVert[24] = {
+        centerPoint_[0],              centerPoint_[1] + (height_/3),    0.0f,    color_[0], color_[1], color_[2], // Center up corner
         centerPoint_[0] - (width_/2), centerPoint_[1] - (height_/2),    0.0f,    color_[0], color_[1], color_[2], // Lower left corner
-        centerPoint_[0] + (width_/2), centerPoint_[1] + (height_/2),    0.0f,    color_[0], color_[1], color_[2], // Upper right corner
+        centerPoint_[0],              centerPoint_[1] - (height_/3),    0.0f,    color_[0], color_[1], color_[2], // Center down corner
         centerPoint_[0] + (width_/2), centerPoint_[1] - (height_/2),    0.0f,    color_[0], color_[1], color_[2], // Lower right corner
-
-        centerPoint_[0] - (width_/4), centerPoint_[1] + (height_/2.0f), 0.0f,    colors::darkGray[0], colors::darkGray[1], colors::darkGray[3], // upp left low
-        centerPoint_[0] - (width_/4), centerPoint_[1] + (height_/1.5f), 0.0f,    colors::darkGray[0], colors::darkGray[1], colors::darkGray[3], // upp left up
-        centerPoint_[0] + (width_/4), centerPoint_[1] + (height_/1.5f), 0.0f,    colors::darkGray[0], colors::darkGray[1], colors::darkGray[3], // upp right up
-        centerPoint_[0] + (width_/4), centerPoint_[1] + (height_/2.0f), 0.0f,    colors::darkGray[0], colors::darkGray[1], colors::darkGray[3], // upp right low
-
-        centerPoint_[0] - (width_/2), centerPoint_[1] + (height_/2.5f), 0.0f,    color_[0], color_[1], color_[3], //
-        centerPoint_[0] - (width_),   centerPoint_[1] - (height_/2.0f), 0.0f,    color_[0], color_[1], color_[3], //
-        centerPoint_[0] + (width_/2), centerPoint_[1] + (height_/2.5f), 0.0f,    color_[0], color_[1], color_[3], //
-        centerPoint_[0] + (width_),   centerPoint_[1] - (height_/2.0f), 0.0f,    color_[0], color_[1], color_[3], //
     };
 
-    for (int i = 0; i < 72; i++) {
+    for (int i = 0; i < 24; i++) {
         vertices[i] = newVert[i];
     }
 }
@@ -60,7 +50,7 @@ void Cube::drawCube() {
     // Bind the VAO so OpenGL knows to use it
     cubeVAO.Bind();
     // Draw primitives, number of indices, datatype of indices, index of indices
-    glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
 void Cube::cubeDelete() {
@@ -81,12 +71,12 @@ void Cube::cubeInit() {
 
 void Cube::Input(GLFWwindow* window) {
     float speed = 0.02f;
-    if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && (vertices[0] <= 0.55f)) { // right
+    if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && (vertices[0] <= 0.6f)) { // right
         for (int i = 0; i < sizeof(vertices)/sizeof(vertices[0]); i+=6) {
             vertices[i] += speed;
         }
     }
-    if ((glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) && (vertices[12] >= -0.55f)) { // left
+    if ((glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) && (vertices[12] >= -0.6f)) { // left
         for (int i = 0; i < sizeof(vertices)/sizeof(vertices[0]); i+=6) {
             vertices[i] -= speed;
         }
