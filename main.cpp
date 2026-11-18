@@ -1,6 +1,7 @@
 //------- Ignore this ----------
 #include<filesystem>
 
+#include "Spawner.h"
 
 
 namespace fs = std::filesystem;
@@ -31,7 +32,7 @@ int main()
 	// So that means we only have the modern functions
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
+	// Create a GLFWwindow object of 1000 by 1000 pixels, naming it "YoutubeOpenGL"
 	GLFWwindow* window = glfwCreateWindow(1000, 1000, "ITWorks", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
@@ -60,34 +61,21 @@ int main()
 	GLfloat cubeLocation[] = {
 		0.0f, -0.58f
 	};
+	GLfloat spawnerLocation[] = {
+		0.0f, 0.7f
+	};
 
-	// All circles have been executed
-	// GLfloat circleLocation1[] = { -0.4f, 0.0f };
-	// GLfloat circleLocation2[] = { -0.2f, 0.0f };
-	// GLfloat circleLocation3[] = { 0.0f, 0.0f };
-	// GLfloat circleLocation4[] = { 0.2f, 0.0f };
-	// GLfloat circleLocation5[] = { 0.4f, 0.0f };
-
-	Cube cube(cubeLocation, 0.15f, 0.075f, colors::white);
-
-	// Circle circle1(circleLocation1, 0.075f, colors::lightGray, res::LOW_RES, cube);
-	// Circle circle2(circleLocation2, 0.075f, colors::lightGray, res::MEDIUM_LOW_RES, cube);
-	// Circle circle3(circleLocation3, 0.075f, colors::lightGray, res::MEDIUM_RES, cube);
-	// Circle circle4(circleLocation4, 0.075f, colors::lightGray, res::MEDIUM_HIGH_RES, cube);
-	// Circle circle5(circleLocation5, 0.075f, colors::lightGray, res::HIGH_RES, cube);
-
-	int score_ = 65;
+	int score_ = 0;
 	Timer score(score_, 0.65f, 0.75f, 0.5f, colors::white);
+	Spawner spawner(spawnerLocation);
+
+	Cube cube(cubeLocation, 0.1f, 0.05f, colors::white, spawner, score_);
+
+
 
 	// Bind, Link and Unbind the VAO, VBO, EBO to initialize the squares
 	cube.cubeInit();
-
-	// circle1.circleInit();
-	// circle2.circleInit();
-	// circle3.circleInit();
-	// circle4.circleInit();
-	// circle5.circleInit();
-
+	spawner.spawnerInit();
 	score.timerInit();
 
 
@@ -102,38 +90,33 @@ int main()
 		shaderProgram.Activate();
 		// Assigns a value to the uniform; NOTE: Must always be done after activating the Shader Program
 		glUniform1f(uniID, 0.5f);
-
 		// movement
 		cube.Input(window);
-
-
-
-		// Draw the square
+		spawner.spawnerMovement();
+		// Draw the objects
 		cube.drawCube();
+		spawner.spawnerDraw();
 
-		// circle1.circleDraw();
-		// circle2.circleDraw();
-		// circle3.circleDraw();
-		// circle4.circleDraw();
-		// circle5.circleDraw();
+
+		score.timerUpdate(cube.getScore());
 
 		score.timerDraw();
+
 
 		// Swap the back buffer with the front buffer
 		glfwSwapBuffers(window);
 		// Take care of all GLFW events
 		glfwPollEvents();
+
+		// Break the loop if the score gets to 99
+		if (cube.getScore() == 100) {
+			break;
+		}
 	}
 
-	// Delete the square
+	// Delete the objects
 	cube.cubeDelete();
-
-	// circle1.circleDelete();
-	// circle2.circleDelete();
-	// circle3.circleDelete();
-	// circle4.circleDelete();
-	// circle5.circleDelete();
-
+	spawner.spawnerDelete();
 	score.timerDelete();
 
 	shaderProgram.Delete();

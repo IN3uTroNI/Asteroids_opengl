@@ -217,6 +217,7 @@ void Timer::timerInit() {
 
 void Timer::timerUpdate(int timer) {
     // clear indices array so it does not break reality
+    if (this->timer == timer || (timer > 99)) return;
     this->timer = timer;
     indicies.clear();
 
@@ -322,7 +323,8 @@ void Timer::timerUpdate(int timer) {
     } // right digit
 
     // rebind the buffer array so it looks ok and does not crash?? | maybe
+    timerVAO.Bind();      // so the EBO binding below belongs to the timer
+    timerEBO.Bind();
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicies.size() * sizeof(GLuint), indicies.data(), GL_DYNAMIC_DRAW);
-    glDrawElements(GL_TRIANGLES, indicies.size(), GL_UNSIGNED_INT, 0);
-
+    timerVAO.Unbind();
 }

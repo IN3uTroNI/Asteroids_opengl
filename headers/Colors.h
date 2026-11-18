@@ -39,7 +39,7 @@ namespace colors {
     inline static GLfloat gold[3]      = {1.0f, 0.843f, 0.0f};
     inline static GLfloat khaki[3]     = {0.941f, 0.902f, 0.549f};
     inline static GLfloat beige[3]     = {0.961f, 0.961f, 0.863f};
-    inline static GLfloat brown[3]     = {0.647f, 0.165f, 0.165f};
+    inline static GLfloat brown[3]     = {0.447f, 0.265f, 0.165f};
     inline static GLfloat chocolate[3] = {0.824f, 0.412f, 0.118f};
 
     // Greens

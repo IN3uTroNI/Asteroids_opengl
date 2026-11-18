@@ -3,15 +3,13 @@
 //
 
 #include "Circle.h"
-
 #include <iostream>
-#include <ostream>
 #include <glm/trigonometric.hpp>
 
 #include "glad/glad.h"
 
 
-Circle::Circle(GLfloat centerPoint_[2], GLfloat radius, GLfloat color_[3], float res, Cube& cube1_) : radius(radius), cube1(cube1_) {
+Circle::Circle(GLfloat centerPoint_[2], GLfloat radius, GLfloat color_[3], float res) : radius(radius) {
     // Generate the points of the circle using the radius
     for (int i = 0; i <= res; i++) {
         float angle = glm::radians(360.0f / res * i);
@@ -87,6 +85,9 @@ void Circle::circleInit() {
     circleUnbind();
 }
 
+/* Used in another game to use
+    Add a Cube& cube to main class
+    definition and to the initializer
 void Circle::circleMovement() {
     static float speedx = 0.004f;
     static float speedy = 0.004f;
@@ -118,9 +119,36 @@ void Circle::circleMovement() {
 
     circleUpdate();
 }
+*/
+
+
+void Circle::circleMMove() {
+    static float speedy = 0.003f;
+
+    for (int i = 0; i < vertices.size(); i += 6) {
+        vertices[i+1] -= speedy;
+    }
+
+    circleUpdate();
+}
+
 
 void Circle::circleUpdate() {
     circleVBO.Bind();
     glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(GLfloat), vertices.data());
     circleVBO.Unbind();
+}
+
+
+// Returns a bool to see if it collided with something
+bool Circle::getCollision(GLfloat pointContact[2]) {
+    return vertices[vertices.size() - 6] - (radius - 0.01f)<= pointContact[0] &&
+           vertices[vertices.size() - 6] + (radius - 0.01f)>= pointContact[0] &&
+           vertices[vertices.size() - 5] - (radius - 0.01f)<= pointContact[1] &&
+           vertices[vertices.size() - 5] + (radius - 0.01f)>= pointContact[1];
+}
+
+// Returns the y position of the circle to check if it can be deleted if it went out of the screen
+GLfloat Circle::getPos() {
+    return vertices[vertices.size() - 5];
 }

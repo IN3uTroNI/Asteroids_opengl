@@ -6,9 +6,10 @@
 #define MYOPENGLPROJECT_CUBE_H
 #define GLM_ENABLE_EXPERIMENTAL
 
+#include <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
+#include "Bullet.h"
 #include "EBO.h"
 #include "VAO.h"
 #include "VBO.h"
@@ -24,12 +25,17 @@ public:
         0, 3, 2, // Lower triangle
     };
 
+    int cooldown = 50;
+
+    std::vector<Bullet> bullets;
+    Spawner& spawner;
+    int* score;
+
     VAO cubeVAO;
     VBO cubeVBO;
     EBO cubeEBO;
 
-    Cube(GLfloat centerPoint_[2], GLfloat height_, GLfloat width_, GLfloat color_[3]);
-    Cube() {};
+    Cube(GLfloat centerPoint_[2], GLfloat height_, GLfloat width_, GLfloat color_[3], Spawner& spawner, int& score);
     void Input(GLFWwindow* window);
     void cubeBind();
     void cubeLink();
@@ -39,6 +45,7 @@ public:
     void cubeInit();
     void cubeUpdate();
     bool getCollision(GLfloat pointColl[2]);
+    int getScore();
 };
 
 #endif //MYOPENGLPROJECT_CUBE_H

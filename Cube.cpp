@@ -4,16 +4,18 @@
 
 #include "headers/Cube.h"
 #include "headers/Colors.h"
+#include <memory>
 
 #include <iostream>
 #include <ostream>
 
-Cube::Cube(GLfloat centerPoint_[2], GLfloat height_, GLfloat width_, GLfloat color_[3]) {
+
+Cube::Cube(GLfloat centerPoint_[2], GLfloat height_, GLfloat width_, GLfloat color_[3], Spawner& spawner, int& score) : spawner(spawner), score(&score) {
     GLfloat newVert[24] = {
         centerPoint_[0],              centerPoint_[1] + (height_/3),    0.0f,    color_[0], color_[1], color_[2], // Center up corner
         centerPoint_[0] - (width_/2), centerPoint_[1] - (height_/2),    0.0f,    color_[0], color_[1], color_[2], // Lower left corner
         centerPoint_[0],              centerPoint_[1] - (height_/3),    0.0f,    color_[0], color_[1], color_[2], // Center down corner
-        centerPoint_[0] + (width_/2), centerPoint_[1] - (height_/2),    0.0f,    color_[0], color_[1], color_[2], // Lower right corner
+        centerPoint_[0] + (width_/2), centerPoint_[1] - (height_/2),    0.0f,    color_[0], color_[1], color_[2]  // Lower right corner
     };
 
     for (int i = 0; i < 24; i++) {
@@ -71,6 +73,10 @@ void Cube::cubeInit() {
 
 void Cube::Input(GLFWwindow* window) {
     float speed = 0.02f;
+    std::cout << "Colldown: " << cooldown << " score: " << *score << std::endl;
+    if (cooldown != 0) {
+        cooldown--;
+    }
     if ((glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) && (vertices[0] <= 0.6f)) { // right
         for (int i = 0; i < sizeof(vertices)/sizeof(vertices[0]); i+=6) {
             vertices[i] += speed;
@@ -81,6 +87,24 @@ void Cube::Input(GLFWwindow* window) {
             vertices[i] -= speed;
         }
     }
+    if ((glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) && (cooldown == 0)) {
+        bullets.push_back(*new Bullet(vertices[0], vertices[1] + 0.0111f, spawner, *score));
+        bullets[bullets.size() - 1].bulletInit();
+        cooldown = 50;
+    }
+
+    for (int i = 0; i < bullets.size(); i++) {
+        bullets[i].bulletMove();
+        bullets[i].bulletDraw();
+        if (bullets[i].getCollision()) {
+            bullets[i].bulletDelete();
+            bullets.erase(bullets.begin() + i);
+        }
+    }
+
+
+
+
 
     cubeUpdate();
 }
@@ -96,4 +120,9 @@ bool Cube::getCollision(GLfloat pointColl[2]) {
            pointColl[0] <= vertices[12] &&   // right
            pointColl[1] >= vertices[7]  &&   // bottom
            pointColl[1] <= vertices[1];      // top
+}
+
+
+int Cube::getScore() {
+    return static_cast<int>(*score);
 }
