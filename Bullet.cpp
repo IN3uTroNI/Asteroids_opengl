@@ -3,6 +3,9 @@
 //
 
 #include "headers/Bullet.h"
+
+#include <glm/detail/qualifier.hpp>
+
 #include "Spawner.h"
 
 Bullet::Bullet(GLfloat posX, GLfloat posY, Spawner &spawner, int &score) : spawner(&spawner), score(&score) {
@@ -88,5 +91,10 @@ bool Bullet::getCollision() {
         return true;
     }
     return false;
+}
+
+std::vector<GLfloat> Bullet::getPosition() {
+    std::vector<GLfloat> position = {verticies[0], verticies[1] + 0.05f};
+    return position;
 }
 

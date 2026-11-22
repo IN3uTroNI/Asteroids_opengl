@@ -4,6 +4,8 @@
 
 #ifndef MYOPENGLPROJECT_BULLET_H
 #define MYOPENGLPROJECT_BULLET_H
+#include <vector>
+
 #include "EBO.h"
 #pragma once
 class Spawner;
@@ -34,6 +36,7 @@ public:
     void bulletUpdate();
     void bulletMove();
     bool getCollision();
+    std::vector<GLfloat> getPosition();
 };
 
 

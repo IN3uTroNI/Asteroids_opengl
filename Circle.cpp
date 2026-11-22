@@ -152,3 +152,8 @@ bool Circle::getCollision(GLfloat pointContact[2]) {
 GLfloat Circle::getPos() {
     return vertices[vertices.size() - 5];
 }
+
+std::vector<GLfloat> Circle::getCenter() {
+    std::vector<GLfloat> center = {vertices[vertices.size() - 6], vertices[vertices.size() - 5]};
+    return center;
+}

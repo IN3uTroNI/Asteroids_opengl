@@ -100,6 +100,7 @@ void Spawner::spawnerMovement() {
         if (circleYPos <= -0.7f ) {
             circles[i].circleDelete();
             circles.erase(circles.begin() + i);
+            alive = false;
         }
     }
 
@@ -123,4 +124,8 @@ bool Spawner::spawnerCollision(GLfloat position[2]) {
         }
     }
     return false;
+}
+
+bool Spawner::getAlive() {
+    return alive;
 }

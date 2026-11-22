@@ -21,6 +21,7 @@ public:
         2, 3, 1
     };
     std::vector<Circle> circles;
+    bool alive = true;
 
     VAO spawnerVAO;
     VBO spawnerVBO;
@@ -37,7 +38,7 @@ public:
     void spawnerInit();
     void spawnerUpdate();
     bool spawnerCollision(GLfloat position[2]);
-
+    bool getAlive();
 
 };
 

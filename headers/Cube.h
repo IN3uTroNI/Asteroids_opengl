@@ -11,6 +11,7 @@
 #include <GLFW/glfw3.h>
 #include "Bullet.h"
 #include "EBO.h"
+#include "Particles.h"
 #include "VAO.h"
 #include "VBO.h"
 
@@ -28,6 +29,7 @@ public:
     int cooldown = 50;
 
     std::vector<Bullet> bullets;
+    std::vector<Particles> particles;
     Spawner& spawner;
     int* score;
 

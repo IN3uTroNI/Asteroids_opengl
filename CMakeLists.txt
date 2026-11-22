@@ -22,6 +22,7 @@ add_executable(app
         Timer.cpp
         Spawner.cpp
         Bullet.cpp
+        Particles.cpp
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

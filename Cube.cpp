@@ -10,6 +10,7 @@
 #include <ostream>
 
 
+
 Cube::Cube(GLfloat centerPoint_[2], GLfloat height_, GLfloat width_, GLfloat color_[3], Spawner& spawner, int& score) : spawner(spawner), score(&score) {
     GLfloat newVert[24] = {
         centerPoint_[0],              centerPoint_[1] + (height_/3),    0.0f,    color_[0], color_[1], color_[2], // Center up corner
@@ -93,17 +94,27 @@ void Cube::Input(GLFWwindow* window) {
         cooldown = 50;
     }
 
+    std::vector<GLfloat> pos;
     for (int i = 0; i < bullets.size(); i++) {
         bullets[i].bulletMove();
         bullets[i].bulletDraw();
         if (bullets[i].getCollision()) {
             bullets[i].bulletDelete();
+            pos = {bullets[i].getPosition()[0], bullets[i].getPosition()[1]};
             bullets.erase(bullets.begin() + i);
+            particles.push_back(*new Particles(pos));
+            particles[particles.size() - 1].partInit();
         }
     }
-
-
-
+    for (int i = 0; i < particles.size(); i++) {
+        if (particles[i].partGetDuration() == 0) {
+            particles[i].partDelete();
+            particles.erase(particles.begin() + i);
+        } else {
+            particles[i].partMove();
+            particles[i].partDraw();
+        }
+    }
 
 
     cubeUpdate();

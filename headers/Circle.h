@@ -42,6 +42,7 @@ class Circle {
         void circleMMove();
         bool getCollision(GLfloat pointContact[2]);
         GLfloat getPos();
+        std::vector<GLfloat> getCenter();
 
 };
 

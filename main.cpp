@@ -1,6 +1,7 @@
 //------- Ignore this ----------
 #include<filesystem>
 
+#include "Particles.h"
 #include "Spawner.h"
 
 
@@ -65,6 +66,7 @@ int main()
 		0.0f, 0.7f
 	};
 
+
 	int score_ = 0;
 	Timer score(score_, 0.65f, 0.75f, 0.5f, colors::white);
 	Spawner spawner(spawnerLocation);
@@ -112,12 +114,17 @@ int main()
 		if (cube.getScore() == 100) {
 			break;
 		}
+		if (!spawner.getAlive()) {
+			break;
+		}
 	}
 
 	// Delete the objects
 	cube.cubeDelete();
 	spawner.spawnerDelete();
 	score.timerDelete();
+
+
 
 	shaderProgram.Delete();
 	// Delete window before ending the program
