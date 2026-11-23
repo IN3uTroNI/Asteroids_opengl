@@ -142,10 +142,14 @@ void Circle::circleUpdate() {
 
 // Returns a bool to see if it collided with something
 bool Circle::getCollision(GLfloat pointContact[2]) {
-    return vertices[vertices.size() - 6] - (radius - 0.01f)<= pointContact[0] &&
-           vertices[vertices.size() - 6] + (radius - 0.01f)>= pointContact[0] &&
-           vertices[vertices.size() - 5] - (radius - 0.01f)<= pointContact[1] &&
-           vertices[vertices.size() - 5] + (radius - 0.01f)>= pointContact[1];
+    float ex1 = vertices[vertices.size() - 6] - pointContact[0];
+    float ex2 = vertices[vertices.size() - 5] - pointContact[1];
+    return ((ex1 * ex1) + (ex2 * ex2)) < (radius*radius);
+
+    //return vertices[vertices.size() - 6] - (radius - 0.01f)<= pointContact[0] &&
+    //       vertices[vertices.size() - 6] + (radius - 0.01f)>= pointContact[0] &&
+    //       vertices[vertices.size() - 5] - (radius - 0.01f)<= pointContact[1] &&
+    //       vertices[vertices.size() - 5] + (radius - 0.01f)>= pointContact[1];
 }
 
 // Returns the y position of the circle to check if it can be deleted if it went out of the screen

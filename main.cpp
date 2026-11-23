@@ -16,7 +16,6 @@ namespace fs = std::filesystem;
 #include"shaderClass.h"
 #include"Cube.h"
 #include"Colors.h"
-#include"Circle.h"
 #include"Timer.h"
 
 int main()
